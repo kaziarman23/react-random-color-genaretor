@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function RandomColor() {
     const [colorType, setColorType] = useState("hex");
@@ -29,10 +29,10 @@ function RandomColor() {
             hexColor += hex[randomColor(hex.length)];
         }
         console.log(hexColor);
-        setColor(hexColor)
+        setColor(hexColor);
     };
     const randomColor = (length) => {
-        return Math.ceil(Math.random() * length - 1)
+        return Math.ceil(Math.random() * length - 1);
 
         // another way of doing the same thing
         // const score = Math.ceil(Math.random() * length - 1);
@@ -41,13 +41,18 @@ function RandomColor() {
     };
 
     const handleRgbColor = () => {
-        const r = randomColor(256)
-        const g = randomColor(256)
-        const b = randomColor(256)
+        const r = randomColor(256);
+        const g = randomColor(256);
+        const b = randomColor(256);
 
-        setColor(`rgb(${r},${g},${b})`)
+        setColor(`rgb(${r},${g},${b})`);
         //console.log(r,g,b)
     };
+
+    useEffect(() => {
+        if (colorType === "rgb") handleRgbColor();
+        else handleHexColor();
+    }, []);
 
     return (
         <div
